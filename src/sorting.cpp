@@ -33,8 +33,17 @@ int* copy_array(int* ar, int len) {
   * @param len: The length of the array to copy
   * @return: A copy of ar
   */
-  int* copy = ar;
+  // original: int* copy = ar;
+  int* copy = malloc(sizeof(int) * len);
+  for (int i = 0; i < len; i++)
+  {
+    copy[i] = ar[i];
+  }
+
+  //memcpy(copy, ar, sizeof(ar));
+
   return copy;
+
 }
 
 int min_index_of_array(int* ar, int len) {
@@ -49,11 +58,11 @@ int min_index_of_array(int* ar, int len) {
   int min_index = 0;
 
   for (int i = 1; i < len; ++i) {
-    if (ar[i] > ar[min_index]) {
+    if (ar[i] < ar[min_index]) {
       min_index = i;
     }
   }
-  return ar[min_index];
+  return min_index;
 }
 
 void swap(int* a, int* b) {
