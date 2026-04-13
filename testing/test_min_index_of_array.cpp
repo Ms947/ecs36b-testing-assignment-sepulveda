@@ -68,12 +68,17 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     /* Check that the value at the location of the minimum index
      * is not larger than any of the other values in the array
      */
-    // Produce random array
-    //int array[] =
-    for (int i = 0; i < array.size(); i++)
+
+    auto values = *rc::gen::nonEmpty(
+        rc::gen::arbitrary<std::vector<int>>());
+    int* array = (int*)malloc(values.size() * sizeof(int));
+
+    copy_vector_to_array(values, array);
+    for (int i = 0; i < values.size; i++)
     {
         RC_ASSERT(min_index <= array[i]);
     }
+    free(array);
 }
 
 RC_GTEST_PROP(MinIndexOfArrayTests,
@@ -82,10 +87,14 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     /*
      * Check that finding the minimum of the array did not change the contents of the array.
      */
-    // Produce random array
-    // Create copy of array
+    auto values = *rc::gen::nonEmpty(
+        rc::gen::arbitrary<std::vector<int>>());
+    int* array = (int*)malloc(values.size() * sizeof(int));
+    copy_vector_to_array(values, array);
+
     for (int i = 0; i < array.size(); i++)
     {
-        RC_ASSERT(array[i] == array_stable[i]);
+        RC_ASSERT(array[i] == values.at(i));
     }
+    free(array);
 }

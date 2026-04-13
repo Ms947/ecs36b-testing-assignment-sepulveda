@@ -34,10 +34,20 @@ int* copy_array(int* ar, int len) {
   * @return: A copy of ar
   */
   // original: int* copy = ar;
-  int* copy = malloc(sizeof(int) * len);
+  //check if length is greater than 0, if so, return nullptr
+  if (len <= 0)
+  {
+    return nullptr;
+  }
+
+  int* copy = (int*)malloc(sizeof(int) * len);
   for (int i = 0; i < len; i++)
   {
     copy[i] = ar[i];
+  }
+  if (copy == nullptr)
+  {
+    return nullptr;
   }
 
   //memcpy(copy, ar, sizeof(ar));
