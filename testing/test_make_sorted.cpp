@@ -40,6 +40,8 @@ TEST(MakeSortedTests, SimpleSortAverageArray) {
      */
     int array[10] = {23, 25, 3, 77, 29, 9, 2, -5, -12, 6};
     int array_sorted[10] = {-12, -5, 2, 3, 6, 9, 23, 25, 29, 77};
+    //int* sorted = get_sorted for the get sorted tests.
+    // array[values.size()], then call copy vector to array for get sorted tests
     make_sorted(array, 10);
     for (int i = 0; i < 10; i++)
     {

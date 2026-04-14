@@ -12,14 +12,14 @@ TEST(SwapTests, SimpleSwapTwoValues) {
     /*
      * Swap two values and see if the swap was successful.
      */
-    int x = 9;
-    int y = 3;
-    int* a = &x;
-    int* b = &y;
-    swap(a, b);
+    //int x = 9;
+    //int y = 3;
+    int a = 9;
+    int b = 3;
+    swap(&a, &b);
 
-    EXPECT_EQ(*b, 9);
-    EXPECT_EQ(*a, 3);
+    EXPECT_EQ(b, 9);
+    EXPECT_EQ(a, 3);
 }
 
 TEST(SwapTests, SimpleSwapValuesInArray) {
@@ -32,10 +32,10 @@ TEST(SwapTests, SimpleSwapValuesInArray) {
 
     //int* a = &x;
     //swap(*(a + 1), *(a + 2));
-    swap(x[1], x[2]);
+    swap(&x[1], &x[2]);
     int swapped_x[3] = {5, 7, 2};
 
-    ASSERT_EQ(x.size, swapped_x.size);
+    EXPECT_EQ(3, x.size);
     for (int i = 0; i < 3; i++)
     {
         EXPECT_EQ(x[i], swapped_x[i]) << "x:" << x[i] << "and expected:" << swapped_x[i] << "differ at index" << i;
@@ -65,25 +65,31 @@ RC_GTEST_PROP(SwapTests,
     /*
      * Swap two values in an array. See that they swapped and the others did not
      */
-    //int length = sizeof(values) / sizeof(values[0]);
+
     // Redo this one. Some wrong stuff
     int length = values.size();
     int* array = new int[length];
     copy_vector_to_array(values, array);
-    int array_copy[length];
+    /*
+    *int array_copy[length];
+    *for (int i = 0; i < length; i++)
+    *{
+    *    array_copy[i] = values[i];
+    *}
+    */
+    //RC_ASSERT(length >= 2);
+    int swapped1 = rand() % length;
+    int swapped2 = rand() % length;
+    swap(&array[swapped1], &array[swapped2]);
+
+    int array_length = sizeof(*array) / sizeof(array[0]);
+    RC_ASSERT(array_length == (int)values.size());
     for (int i = 0; i < length; i++)
     {
-        array_copy[i] = values[i];
-    }
-    RC_ASSERT(length >= 2);
-    swap(values[length - 1], values[length - 2]);
-
-    RC_ASSERT(array_copy.size == values.size);
-    for (int i = 0; i < length - 2; i++)
-    {
-        EXPECT_EQ(values[i], array_copy[i]);
+        if (i == swapped1 || i == swapped2) continue;
+        RC_ASSERT(values[i] == values.at(i));
     }
 
-    EXPECT_EQ(values[length - 2], array_copy[length - 1]);
-    EXPECT_EQ(values[length - 1], array_copy[length - 2]);
+    RC_ASSERT(array[swapped1] == values.at(swapped2));
+    RC_ASSERT(array[swapped2] == values.at(swapped1));
 }

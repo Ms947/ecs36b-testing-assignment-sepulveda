@@ -4,6 +4,7 @@
 #include "gmock/gmock.h"
 #include "rapidcheck/gtest.h"
 #include "sorting.h"
+#include "test_helpers.h"
 
 TEST(MinIndexOfArrayTests, SimpleMinIndexAtFrontOfArray) {
     /*
@@ -91,8 +92,7 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
         rc::gen::arbitrary<std::vector<int>>());
     int* array = (int*)malloc(values.size() * sizeof(int));
     copy_vector_to_array(values, array);
-
-    for (int i = 0; i < array.size(); i++)
+    for (int i = 0; i < values.size(); i++)
     {
         RC_ASSERT(array[i] == values.at(i));
     }
