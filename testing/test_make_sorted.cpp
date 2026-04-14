@@ -78,7 +78,7 @@ RC_GTEST_PROP(MakeSortedTests,
 
     RC_ASSERT(elements_in_vector_and_array_are_same(values, array));
 
-    for (int i = 1; i < (int)values.size(); i++)
+    for (int i = 1; i < (int)values.size() + 1; i++)
     {
         // check that the current value is >= the previous value
         RC_ASSERT(array[i] >= array[i - 1]);
