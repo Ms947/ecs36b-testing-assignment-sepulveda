@@ -35,7 +35,8 @@ TEST(SwapTests, SimpleSwapValuesInArray) {
     swap(&x[1], &x[2]);
     int swapped_x[3] = {5, 7, 2};
 
-    EXPECT_EQ(3, x.size);
+    int new_length = sizeof(x) / sizeof(x[0]);
+    EXPECT_EQ(3, new_length);
     for (int i = 0; i < 3; i++)
     {
         EXPECT_EQ(x[i], swapped_x[i]) << "x:" << x[i] << "and expected:" << swapped_x[i] << "differ at index" << i;
@@ -53,8 +54,8 @@ RC_GTEST_PROP(SwapTests,
     int a_final = b_start;
     int b_final = a_start;
     swap(&a_start, &b_start);
-    RC_ASSERT(a_start == a_final) << a_start << "is not correct, it should be" << a_final;
-    RC_ASSERT(b_start == b_final) << b_start << "is not correct, it should be" << b_final;
+    RC_ASSERT(a_start == a_final); // << a_start << "is not correct, it should be" << a_final;
+    RC_ASSERT(b_start == b_final); // << b_start << "is not correct, it should be" << b_final;
 }
 
 
@@ -66,7 +67,6 @@ RC_GTEST_PROP(SwapTests,
      * Swap two values in an array. See that they swapped and the others did not
      */
 
-    // Redo this one. Some wrong stuff
     int length = values.size();
     int* array = new int[length];
     copy_vector_to_array(values, array);
@@ -92,4 +92,6 @@ RC_GTEST_PROP(SwapTests,
 
     RC_ASSERT(array[swapped1] == values.at(swapped2));
     RC_ASSERT(array[swapped2] == values.at(swapped1));
+
+    delete[] array;
 }

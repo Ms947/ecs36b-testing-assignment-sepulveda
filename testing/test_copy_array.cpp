@@ -67,15 +67,18 @@ RC_GTEST_PROP(CopyArrayTests,
      * Check that the values in the copy are the same as the values in the original array.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
-    int* array_values = malloc(values.size() * sizeof(int));
+    //int* array_values = malloc(values.size() * sizeof(int));
+
+    int* array_values = new int[values.size()];
     copy_vector_to_array(values, array_values);
+
     int* copied_array = copy_array(array_values, values.size());
-    for (int i = 0; i < values.size(); i++)
+    for (int i = 0; i < (int)values.size(); i++)
     {
-        RC_ASSERT(copied_array[i] == values[i]);
+        RC_ASSERT(copied_array[i] == values.at(i));
     }
     free(copied_array);
-    free(array_values);
+    delete[] array_values;
 }
 
 RC_GTEST_PROP(CopyArrayTests,
@@ -86,7 +89,9 @@ RC_GTEST_PROP(CopyArrayTests,
      * Check that the  values in the original array did not change.
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
-    int* array_values = malloc(values.size() * sizeof(int));
+    //int* array_values = malloc(values.size() * sizeof(int));
+
+    int* array_values = new int[values.size()];
     copy_vector_to_array(values, array_values);
     //int array[values.size()];
     //for (int i = 0; i < values.size(); i++)
@@ -100,7 +105,7 @@ RC_GTEST_PROP(CopyArrayTests,
         RC_ASSERT(array_values[i] == values.at(i));
     }
     free(copied_array);
-    free(array_values);
+    delete[] array_values;
 }
 
 RC_GTEST_PROP(CopyArrayTests,
@@ -112,8 +117,11 @@ RC_GTEST_PROP(CopyArrayTests,
   * (ar and copy point to different locations in memory and no parts of the two arrays overlap)
   * Don't forget to free any memory that was dynamically allocated as part of your test.
   */
-    int* array_values = malloc(values.size() * sizeof(int));
+    //int* array_values = malloc(values.size() * sizeof(int));
+
+    int* array_values = new int[values.size()];
     copy_vector_to_array(values, array_values);
+
     int* copied_array = copy_array(array_values, values.size());
 
     for (int i = 0; i < values.size(); i++)
@@ -121,7 +129,7 @@ RC_GTEST_PROP(CopyArrayTests,
         RC_ASSERT(&copied_array[i] != &array_values[i]);
     }
     free(copied_array);
-    free(array_values);
+    delete[] array_values;
 }
 
 
