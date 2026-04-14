@@ -72,14 +72,16 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
 
     auto values = *rc::gen::nonEmpty(
         rc::gen::arbitrary<std::vector<int>>());
-    int* array = (int*)malloc(values.size() * sizeof(int));
-
+    int* array = new int[values.size()];
+    //int* array = (int*)malloc(values.size() * sizeof(int));
     copy_vector_to_array(values, array);
-    for (int i = 0; i < values.size; i++)
+
+    int min_index = min_index_of_array(array, values.size());
+    for (int i = 0; i < (int)values.size(); i++)
     {
         RC_ASSERT(min_index <= array[i]);
     }
-    free(array);
+    delete[] array;
 }
 
 RC_GTEST_PROP(MinIndexOfArrayTests,
@@ -90,11 +92,14 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
      */
     auto values = *rc::gen::nonEmpty(
         rc::gen::arbitrary<std::vector<int>>());
-    int* array = (int*)malloc(values.size() * sizeof(int));
+    //int* array = (int*)malloc(values.size() * sizeof(int));
+    int* array = new int[values.size()];
     copy_vector_to_array(values, array);
+
+    int min_index = min_index_of_array(array, values.size());
     for (int i = 0; i < values.size(); i++)
     {
         RC_ASSERT(array[i] == values.at(i));
     }
-    free(array);
+    delete[] array;
 }
