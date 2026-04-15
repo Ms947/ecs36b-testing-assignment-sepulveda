@@ -100,7 +100,7 @@ RC_GTEST_PROP(CopyArrayTests,
     //}
     int* copied_array = copy_array(array_values, values.size());
 
-    for (int i = 0; i < values.size(); i++)
+    for (int i = 0; i < (int)values.size(); i++)
     {
         RC_ASSERT(array_values[i] == values.at(i));
     }
@@ -124,7 +124,7 @@ RC_GTEST_PROP(CopyArrayTests,
 
     int* copied_array = copy_array(array_values, values.size());
 
-    for (int i = 0; i < values.size(); i++)
+    for (int i = 0; i < (int)values.size(); i++)
     {
         RC_ASSERT(&copied_array[i] != &array_values[i]);
     }

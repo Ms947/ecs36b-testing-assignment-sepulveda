@@ -9,11 +9,21 @@ auto word_generator() {
     /* Creates a generator for a string made up of
      * characters from [a - z]
      */
+    auto letter_generator = rc::gen::inRange<char>('a', 'z' + 1);
+    return rc::gen::container<std::string>(letter_generator);
+
 }
 
 auto vector_of_ints_to_vector_of_strings(const std::vector<int>& numbers) {
     /* Create a vector of strings from a vector of ints
      */
+    //auto vector_of_strings = rc::gen::container<std::vector>(word_generator());
+    // How do I make vector numbers into a vector of letters
+    // First we know we can assign each number a letter, (can't do this ->)maybe even just cast string or char onto numbers
+    // but how do we copy a vector to another vector?
+    auto vector_of_strings = //??
+
+
 }
 
 
@@ -23,6 +33,7 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
      * (ar_out and len_out are set to the right values).
      * Don't forget to free any memory that was dynamically allocated as part of your test.'
      */
+    parse_args()
 }
 
 TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
