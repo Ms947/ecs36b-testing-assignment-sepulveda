@@ -118,7 +118,7 @@ RC_GTEST_PROP(GetSortedTests,
     copy_vector_to_array(values, arr);
     int* sorted_array = get_sorted(arr, values.size());
 
-    for (int i = 1; i < values.size(); i++)
+    for (int i = 1; i < (int)values.size(); i++)
     {
         RC_ASSERT(sorted_array[i] >= sorted_array[i - 1]);
     }

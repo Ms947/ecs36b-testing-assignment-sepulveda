@@ -55,7 +55,7 @@ TEST(MinIndexOfArrayTests, SimpleArrayDoesNotChange) {
     int arr[6] = {-345, 3, 29, -23, 13, 567};
     int arr_stable[6] = {-345, 3, 29, -23, 13, 567};
 
-    int min = min_index_of_array(arr, 6);
+    min_index_of_array(arr, 6);
     for (int i = 0; i < 6; i++)
     {
         EXPECT_EQ(arr_stable[i], arr[i]);
@@ -96,8 +96,8 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     int* array = new int[values.size()];
     copy_vector_to_array(values, array);
 
-    int min_index = min_index_of_array(array, values.size());
-    for (int i = 0; i < values.size(); i++)
+    min_index_of_array(array, values.size());
+    for (int i = 0; i < (int)values.size(); i++)
     {
         RC_ASSERT(array[i] == values.at(i));
     }

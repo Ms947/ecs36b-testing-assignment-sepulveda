@@ -45,15 +45,8 @@ int* copy_array(int* ar, int len) {
   {
     copy[i] = ar[i];
   }
-  if (copy == nullptr)
-  {
-    return nullptr;
-  }
-
-  //memcpy(copy, ar, sizeof(ar));
 
   return copy;
-
 }
 
 int min_index_of_array(int* ar, int len) {

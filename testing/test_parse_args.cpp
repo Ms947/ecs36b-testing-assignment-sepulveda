@@ -19,9 +19,16 @@ auto vector_of_ints_to_vector_of_strings(const std::vector<int>& numbers) {
      */
     //auto vector_of_strings = rc::gen::container<std::vector>(word_generator());
     // How do I make vector numbers into a vector of letters
-    // First we know we can assign each number a letter, (can't do this ->)maybe even just cast string or char onto numbers
+    // First we know we can assign each number a letter
     // but how do we copy a vector to another vector?
-    auto vector_of_strings = //??
+    //auto vector_of_strings = //??
+    std::vector<std::string> vector_of_strings;
+
+    for (int i = 0; i < (int)numbers.size(); i++)
+    {
+        vector_of_strings[i] = numbers[i]; //but somehow make that index be turned into a string
+        // alternatively, use pushback.
+    }
 
 
 }
@@ -33,7 +40,7 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
      * (ar_out and len_out are set to the right values).
      * Don't forget to free any memory that was dynamically allocated as part of your test.'
      */
-    parse_args()
+    //parse_args()
 }
 
 TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
