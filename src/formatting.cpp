@@ -19,7 +19,7 @@ void print_ar(int* ar, int len) {
   }
 }
 
-void parse_args(int argc, char** argv, int* ar_out, int* len_out){
+void parse_args(int argc, const char* argv[], int* ar_out, int* len_out){
   /**
  * Transform the command line arguments from their string representations to their numeric values
  * @param argc: the number of the command line arguments
