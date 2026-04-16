@@ -60,6 +60,11 @@ int min_index_of_array(int* ar, int len) {
 
   int min_index = 0;
 
+  if (len == 1)
+  {
+    return 0;
+  }
+
   for (int i = 1; i < len; ++i) {
     if (ar[i] < ar[min_index]) {
       min_index = i;

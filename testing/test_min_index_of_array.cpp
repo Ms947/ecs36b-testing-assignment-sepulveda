@@ -79,7 +79,7 @@ RC_GTEST_PROP(MinIndexOfArrayTests,
     int min_index = min_index_of_array(array, values.size());
     for (int i = 0; i < (int)values.size(); i++)
     {
-        RC_ASSERT(min_index <= array[i]);
+        RC_ASSERT(array[min_index] <= array[i]);
     }
     delete[] array;
 }
