@@ -37,18 +37,18 @@ TEST(ParseArgsTests, SimpleCheckArgumentsParsedSuccessfully) {
      */
     int argc = 5;
     const char* argv[5] = {"hello", "90", "36", "22", "8"};
-    int* ar_out = NULL;
+    int* ar_out = nullptr;
     int len_out = 1;
 
-    parse_args(argc, argv, ar_out, &len_out);
+    parse_args(argc, argv, &ar_out, &len_out);
 
     ASSERT_NE(ar_out, nullptr);
     ASSERT_EQ(len_out, 4);
 
-    EXPECT_EQ(ar_out[1], 90);
-    EXPECT_EQ(ar_out[2], 36);
-    EXPECT_EQ(ar_out[3], 22);
-    EXPECT_EQ(ar_out[4], 8);
+    EXPECT_EQ(ar_out[0], 90);
+    EXPECT_EQ(ar_out[1], 36);
+    EXPECT_EQ(ar_out[2], 22);
+    EXPECT_EQ(ar_out[3], 8);
 
     free(ar_out);
 }
@@ -63,7 +63,7 @@ TEST(ParseArgsTests, SimpleCheckParseNoArgs) {
     int* ar_out = NULL;
     int len_out = 10;
 
-    parse_args(argc, argv, ar_out, &len_out);
+    parse_args(argc, argv, &ar_out, &len_out);
 
     ASSERT_EQ(ar_out, nullptr);
     ASSERT_EQ(len_out, 0);
@@ -83,9 +83,12 @@ RC_GTEST_PROP(ParseArgsTests,
 
     // Setting up vector of inputs.
     std::vector<std::string> argv_vector;
-    std::vector<std::string> argv_generated_numbers;
+    auto values = *rc::gen::nonEmpty(
+        rc::gen::arbitrary<std::vector<int>>());
+    std::vector<std::string> argv_generated_numbers = vector_of_ints_to_vector_of_strings(values);
 
     std::string argv1 = *word_generator().as("argv1");
+
     argv_vector.push_back(argv1);
     for (int i = 0; i < (int)argv_generated_numbers.size(); i++)
     {
@@ -100,12 +103,12 @@ RC_GTEST_PROP(ParseArgsTests,
     }
 
     // defining the rest of the variables
-    int argc = argv_generated_numbers.size() + 1;
-    int* ar_out = NULL;
+    int argc = (int)argv_generated_numbers.size() + 1;
+    int* ar_out = nullptr;
     int len_out = argc + 25;
 
     // Test starts here
-    parse_args(argc, argv, ar_out, &len_out);
+    parse_args(argc, argv, &ar_out, &len_out);
 
     RC_ASSERT(ar_out != nullptr);
     RC_ASSERT(len_out == (int)argv_generated_numbers.size());
@@ -137,7 +140,7 @@ RC_GTEST_PROP(ParseArgsTests,
     int* ar_out = NULL;
     int len_out = 20;
 
-    parse_args(argc, argv, ar_out, &len_out);
+    parse_args(argc, argv, &ar_out, &len_out);
 
     RC_ASSERT(ar_out == nullptr);
     RC_ASSERT(len_out == 0);
