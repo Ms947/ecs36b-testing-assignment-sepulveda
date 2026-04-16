@@ -157,11 +157,11 @@ RC_GTEST_PROP(GetSortedTests,
      * (ar and copy point to different locations in memory and no parts of the two arrays overlap)
      * Don't forget to free any memory that was dynamically allocated as part of your test.
      */
-    int*arr = new int[values.size()];
+    int* arr = new int[values.size()];
     copy_vector_to_array(values, arr);
     int* sorted_array = get_sorted(arr, values.size());
 
-    for (int i = 1; i < (int)values.size() + 1; i++)
+    for (int i = 1; i < (int)values.size(); i++)
     {
         RC_ASSERT(&arr[i - 1] != &sorted_array[i - 1]);
         RC_ASSERT(sorted_array[i] >= sorted_array[i - 1]);
