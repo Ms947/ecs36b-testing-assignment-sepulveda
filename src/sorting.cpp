@@ -33,8 +33,7 @@ int* copy_array(int* ar, int len) {
   * @param len: The length of the array to copy
   * @return: A copy of ar
   */
-  // original: int* copy = ar;
-  //check if length is greater than 0, if so, return nullptr
+
   if (len <= 0)
   {
     return nullptr;

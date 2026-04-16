@@ -34,76 +34,111 @@
 
 ### Location
 
-Line number(s) of the bugs.
+Lines 66 - 68
 
 ```c++
-Copy of the buggy code
+ int* temp = a;
+  a = b;
+  b = temp;
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+I found the bug when I was writing the test_swap.cpp tests.
 
 ### Description
 
-Describe the bug
+This code attempts to swap a and b. It creates a pointer
+temp that points to a. a then points to b, and b points to temp.
 
-### Fix 
+### Fix
 
-Explain how you fixed the bug
+To fix the bug, I made temp into a normal integer whose
+value was a (dereferenced a when initializing temp). 
+I also dereferenced a and b when assigning their new values.
 
 ```c++
-Copy of the fixed code
+  int temp = *a;
+  *a = *b;
+  *b = temp;
 ```
 
 ### Bug 2
 
 ### Location
 
-Line number(s) of the bugs.
+lines 36 and 37
 
 ```c++
-Copy of the buggy code
+  int* copy = ar;
+  return copy;
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+I found the bug because the code wouldn't build, and the
+builder showed me specifically that this function (copy_array) was
+causing an error.
 
 ### Description
 
-Describe the bug
+It is trying to make a copy of ar, but does it incorrectly
+so it doesn't work. It tries to make a pointer called copy
+that points to ar.
 
-### Fix
+### Fix 
 
-Explain how you fixed the bug
+I completely rewrote the function so that memory was
+allocated to the copy, and then assigned each index of
+copy to be a copy of the indeces of ar.
 
 ```c++
-Copy of the fixed code
+  int* copy = (int*)malloc(sizeof(int) * len);
+  for (int i = 0; i < len; i++)
+  {
+    copy[i] = ar[i];
+  }
+
+  return copy;
 ```
 
 ### Bug 3
 
 ### Location
 
-Line number(s) of the bugs.
+Lines 51 - 56 in sorting.cpp
 
 ```c++
-Copy of the buggy code
+for (int i = 1; i < len; ++i) {
+    if (ar[i] > ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return ar[min_index];
 ```
 
 ### How the bug was located
 
-Explain how you found the bug
+I found this bug while writing the test_min_index_of_array.cpp
+tests. I was looking through the min_index_of_array() function 
+to make sure I was writing the tests correctly.
 
 ### Description
 
-Describe the bug
+The if statement uses the wrong comparison sign
+and the function returns the element at the minimum index,
+when it should return the minimum index number.
 
 ### Fix
 
-Explain how you fixed the bug
+I made the greater than sign in the if statement into a less than sign,
+then I made the function return min_index.
 
 ```c++
-Copy of the fixed code
+  for (int i = 1; i < len; ++i) {
+    if (ar[i] < ar[min_index]) {
+      min_index = i;
+    }
+  }
+  return min_index;
 ```
